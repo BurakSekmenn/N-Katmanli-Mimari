@@ -17,8 +17,8 @@ public interface IService <T> where T : class
     // Productsrepository.where(x=>x.id>5)// bundan sonra farklı işlem yaparım ama TolistAsync() ile bitirirsem veritabanına sorguyu gönderir.
     IQueryable<T> Where(Expression<Func<T, bool>> expression);
     Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
-    Task AddAsync(T entity);
-    Task AddRangeAsync(IEnumerable<T> entites);
+    Task<T> AddAsync(T entity);
+    Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entites);
     Task UpdateAsync(T entity);
     Task RemoveAsync(T entity);
     Task RemoveRangeAsync(IEnumerable<T> entities);

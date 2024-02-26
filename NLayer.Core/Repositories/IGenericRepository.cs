@@ -7,7 +7,7 @@ public interface IGenericRepository<T> where T : class
 
     Task<T> GetByIdAsync(int id);
 
-    IQueryable<T> GetAll(Expression<Func<T, bool>> expression);
+    IQueryable<T> GetAll();
 
 
     // Productsrepository.where(x=>x.id>5)// bundan sonra farklı işlem yaparım ama TolistAsync() ile bitirirsem veritabanına sorguyu gönderir.
