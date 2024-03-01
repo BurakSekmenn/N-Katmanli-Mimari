@@ -26,6 +26,7 @@ namespace NLayer.Repository.Repositories
         public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
+
         }
 
         public async Task AddRangeAsync(IEnumerable<T> entites)

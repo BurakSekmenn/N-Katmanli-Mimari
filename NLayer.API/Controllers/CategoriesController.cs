@@ -1,19 +1,21 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NLayer.API.Filters;
 using NLayer.Core.DTOs;
 using NLayer.Core.Entity;
 using NLayer.Core.Services;
+using NLayer.Service.Services;
 
 namespace NLayer.API.Controllers
 {
-
+ 
     public class CategoriesController : CustomBaseController
     {
 
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
-        public CategoriesController(ICategoryService categoryService, IMapper mapper = null)
+        public CategoriesController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
             _mapper = mapper;
@@ -31,7 +33,7 @@ namespace NLayer.API.Controllers
         {
             var category = await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto));
             var categoryDtos = _mapper.Map<CategoryDto>(category);
-            return CreateActionResult(CustomeResponseDto<CategoryDto>.Success(categoryDtos, 201));
+            return CreateActionResult(category != null ? CustomeResponseDto<CategoryDto>.Success(categoryDtos, 201) : CustomeResponseDto<CategoryDto>.Fail("Hata", 201));
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -40,15 +42,12 @@ namespace NLayer.API.Controllers
             var categorydto = _mapper.Map<CategoryDto>(categories);
             return CreateActionResult(CustomeResponseDto<CategoryDto>.Success(categorydto, 200));
         }
-
-
-
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var categories = await _categoryService.GetAllAsync();
-            var categorydto = _mapper.Map<CategoryDto>(categories);
-            return CreateActionResult(CustomeResponseDto<CategoryDto>.Success(categorydto, 200));
+            var products = await _categoryService.GetAllAsync();
+            var categoryDtos = _mapper.Map<List<CategoryDto>>(products.ToList());
+            return CreateActionResult(CustomeResponseDto<List<CategoryDto>>.Success(categoryDtos, 200));
         }
 
         [HttpDelete("{id}")]

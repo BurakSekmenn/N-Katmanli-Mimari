@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NLayer.API.Filters;
 using NLayer.Core.DTOs;
 using NLayer.Core.Entity;
 using NLayer.Core.Services;
 
 namespace NLayer.API.Controllers
 {
-    
+  
     public class ProductsController : CustomBaseController
     {
         private readonly IMapper _mapper;
         
         private readonly IProductServices _productservice;
 
-        public ProductsController(IMapper mapper, IProductServices productServices = null, IProductServices productservice = null)
+        public ProductsController(IMapper mapper, IProductServices productServices , IProductServices productservice)
         {
 
             _mapper = mapper;
@@ -59,7 +59,8 @@ namespace NLayer.API.Controllers
         public async Task<IActionResult> Update(ProductDto productDto)
         {
             await _productservice.UpdateAsync(_mapper.Map<Product>(productDto));
-            return CreateActionResult(CustomeResponseDto<ProductDto>.Success(204));
+            var productDtos = _mapper.Map<ProductDto>(productDto);
+            return Ok( CustomeResponseDto<ProductDto>.Success(productDtos,204));
         }
 
         [HttpDelete("{id}")]
