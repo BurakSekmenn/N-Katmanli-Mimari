@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using NLayer.Service.Exceptions;
 
 namespace NLayer.Service.Services
 {
@@ -49,7 +50,14 @@ namespace NLayer.Service.Services
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _genericRepository.GetByIdAsync(id);
+            var hasProduct = await _genericRepository.GetByIdAsync(id);
+
+            if (hasProduct == null)
+            {
+                throw new NotFoundExecption($"{typeof(T).Name}({id}) Not Found");
+            }
+
+            return hasProduct;
         }
 
         public async Task RemoveAsync(T entity)

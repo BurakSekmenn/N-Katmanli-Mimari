@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using NLayer.API.Filters;
 using NLayer.Core.DTOs;
 using NLayer.Core.Entity;
 using NLayer.Core.Services;
 
 namespace NLayer.API.Controllers
 {
-  
+
     public class ProductsController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -44,6 +43,13 @@ namespace NLayer.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var product = await _productservice.GetByIdAsync(id);
+
+            //if (product == null)
+            //{
+            //    return CreateActionResult(CustomeResponseDto<ProductDto>.Fail("Ürün bulunamadı", 200));
+            //}
+            // bu iyi bir yoll değil çünkü bu işlemi her seferinde yapmak zorunda kalırız
+
             var productDto = _mapper.Map<ProductDto>(product);
             return CreateActionResult(CustomeResponseDto<ProductDto>.Success(productDto, 200));
         }

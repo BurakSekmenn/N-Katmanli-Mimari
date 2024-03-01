@@ -11,7 +11,6 @@ using NLayer.Repository.Repositories;
 using NLayer.Repository.UnitOfWorks;
 using NLayer.Service.Mapping;
 using NLayer.Service.Services;
-using NLayer.Service.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
