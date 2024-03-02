@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace NLayer.Core.Services;
 
@@ -11,7 +6,13 @@ public interface IService <T> where T : class
 {
     Task<T> GetByIdAsync(int id);
 
+
+
     Task<IEnumerable<T>> GetAllAsync();
+
+
+
+
 
 
     // Productsrepository.where(x=>x.id>5)// bundan sonra farklı işlem yaparım ama TolistAsync() ile bitirirsem veritabanına sorguyu gönderir.

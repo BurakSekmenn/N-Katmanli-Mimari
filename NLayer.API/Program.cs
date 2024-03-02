@@ -32,10 +32,17 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 
 
+
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
+
+
+builder.Services.AddScoped(typeof(NotFoundFilter<>));
+
 
 builder.Services.AddScoped<IUnitOfWorks, UnitOfWorks>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
