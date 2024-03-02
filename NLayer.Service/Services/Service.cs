@@ -2,13 +2,8 @@
 using NLayer.Core.Repositories;
 using NLayer.Core.Services;
 using NLayer.Core.UnitOfWorks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using NLayer.Service.Exceptions;
+using System.Linq.Expressions;
 
 namespace NLayer.Service.Services
 {
@@ -46,6 +41,11 @@ namespace NLayer.Service.Services
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
         {
            return await _genericRepository.AnyAsync(expression);
+        }
+
+        public IQueryable<T> GetAll()
+        {
+            return _genericRepository.GetAll();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()

@@ -6,7 +6,7 @@ public interface IService <T> where T : class
 {
     Task<T> GetByIdAsync(int id);
 
-
+    IQueryable<T> GetAll();
 
     Task<IEnumerable<T>> GetAllAsync();
 
