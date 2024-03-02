@@ -26,6 +26,11 @@ namespace NLayer.Service.Services
 
         public async Task<T> AddAsync(T entity)
         {
+            
+
+
+
+
             await _genericRepository.AddAsync(entity);
             await _unitOfWorks.CommitAsync(); // SaveChangesAsync Methodunu çağırıyoruz.
             return entity;
