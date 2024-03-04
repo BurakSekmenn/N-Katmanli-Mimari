@@ -1,12 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NLayer.Core.Services;
 
 namespace NLayer.WebNProject.Controllers
 {
     public class ProductController : Controller
     {
-        public IActionResult Index()
+        private readonly IProductServices _productServices;
+
+        public ProductController(IProductServices productServices)
         {
-            return View();
+            _productServices = productServices;
+        }
+        public async Task<IActionResult> Index()
+        {
+            return View(await _productServices.GetProductWithCategories());
         }
     }
 }
