@@ -50,9 +50,6 @@ builder.Services.AddAutoMapper(typeof(MapProfile));
 // Biz Burada bu verileri repository ve service modulüne taþýdýk
 
 
-
-
-
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon"), options =>
