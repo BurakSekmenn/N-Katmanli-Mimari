@@ -15,5 +15,10 @@ namespace NLayer.WebNProject.Controllers
         {
             return View(await _productServices.GetProductWithCategories());
         }
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
     }
 }
